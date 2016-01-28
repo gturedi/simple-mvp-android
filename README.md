@@ -1,1 +1,1 @@
-simple android project created with mvp patern
+simple android project created with mvp pattern
