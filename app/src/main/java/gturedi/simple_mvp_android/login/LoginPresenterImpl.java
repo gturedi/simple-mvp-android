@@ -1,6 +1,6 @@
 package gturedi.simple_mvp_android.login;
 
-import gturedi.com.gitsamples.mvp.OperationListener;
+import gturedi.simple_mvp_android.LoginResultListener;
 
 public class LoginPresenterImpl
         implements LoginPresenter {
@@ -16,14 +16,14 @@ public class LoginPresenterImpl
     @Override
     public void login(String user, String pass) {
         view.showLoading();
-        model.checkAuthAsync(user, pass, new OperationListener<String>() {
+        model.doLogin(user, pass, new LoginResultListener() {
             @Override
-            public void onComplate(String data, Exception error) {
-                if (error == null) {
-                    view.navigateToHome();
-                } else {
-                    view.showError(error.getMessage());
-                }
+            public void onSuccess() {
+                view.navigateToHome();
+            }
+            @Override
+            public void onFail() {
+                view.showError("given credentials are not valid");
             }
         });
     }

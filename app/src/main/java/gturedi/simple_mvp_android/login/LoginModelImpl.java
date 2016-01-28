@@ -1,21 +1,26 @@
 package gturedi.simple_mvp_android.login;
 
 import android.os.Handler;
-
-import gturedi.com.gitsamples.mvp.OperationListener;
+import gturedi.simple_mvp_android.LoginResultListener;
 
 public class LoginModelImpl
         implements LoginModel {
 
+    public static final String USER = "fener";
+    public static final String PASS = "1907";
+
     @Override
-    public void checkAuthAsync(final String user, final OperationListener<String> listener) {
+    public void doLogin(final String user, final String pass, final LoginResultListener listener) {
+        // burda asenkron islemi karsilayan islemler ui thread'de calistigi icin
+        // handler kullandım fakat aslında model katmanının android framework'une bagımlı olmaması gerekli
+        // yoksa atıyorum aynı uygulamanın desktop/swing uyarlaması yazılırken sadece view'inin degismesi gerekli
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (user.equals("gturedi")) {
-                    listener.onComplate("bla bla", null);
+                if (user.equals(USER) && pass.equals(PASS)) {
+                    listener.onSuccess();
                 } else {
-                    listener.onComplate(null, new Exception("credentials are not valid"));
+                    listener.onFail();
                 }
             }
         }, 1500);

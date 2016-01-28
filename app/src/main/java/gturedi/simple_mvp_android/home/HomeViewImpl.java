@@ -3,7 +3,7 @@ package gturedi.simple_mvp_android.home;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import gturedi.com.gitsamples.R;
+import gturedi.simple_mvp_android.R;
 
 public class HomeViewImpl
         extends AppCompatActivity

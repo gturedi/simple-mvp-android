@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import gturedi.simple_mvp_android.R;
 import gturedi.simple_mvp_android.home.HomeViewImpl;
 
+// aslında sınıf ismi LoginActivity olsa daha uygun fakat mvp eşletiştirme kolay olsun diye böyle adlandırdım
 public class LoginViewImpl
         extends AppCompatActivity
         implements LoginView {
@@ -35,6 +36,7 @@ public class LoginViewImpl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        // basit tutmak adına dagger(dependency injection) kullanmadım, kullanmak daha makbul
         presenter = new LoginPresenterImpl(this, new LoginModelImpl());
     }
 
@@ -53,7 +55,6 @@ public class LoginViewImpl
     @Override
     public void showError(String msg) {
         hideLoading();
-        //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Snackbar.make(user, msg, Snackbar.LENGTH_SHORT).show();
     }
 
